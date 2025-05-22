@@ -26,9 +26,9 @@ check_root(){
 validate(){
     if [ $1 -eq 0 ]
     then 
-        echo -e "$g installation of $2 success $n" | tee -a $log_file
+        echo -e "$g  $2 success $n" | tee -a $log_file
     else   
-        echo -e "$r installation of $2 failed $n" | tee -a $log_file
+        echo -e "$r  $2 failed $n" | tee -a $log_file
         exit 1
     fi
 }
