@@ -49,6 +49,15 @@ nginx_setup(){
     validate $? "Starting nginx"
 }
 
+maven_setup(){
+
+    dnf install maven -y &>>$log_file
+    validate $? "installing maven and java"
+
+    mvn clean package &>>$log_file
+    validate $? "packaging the shipping application"
+}
+
 nodejs_setup(){
     dnf module disable nodejs -y &>>$log_file
     validate $? "disabling nodejs"
