@@ -33,6 +33,21 @@ validate(){
         exit 1
     fi
 }
+nginx_setup(){
+
+    dnf module disable nginx -y &>>$log_file
+    validate $? "disabling nginx"
+
+    dnf module enable nginx:1.24 -y &>>$log_file
+    validate $? "enabling nginx:1.24"
+
+    dnf install nginx -y &>>$log_file
+    validate $? "installing nginx"
+
+    systemctl enable nginx &>>$log_file
+    systemctl start nginx 
+    validate $? "Starting nginx"
+}
 
 nodejs_setup(){
     dnf module disable nodejs -y &>>$log_file
