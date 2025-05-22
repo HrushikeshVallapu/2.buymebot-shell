@@ -56,6 +56,9 @@ maven_setup(){
 
     mvn clean package &>>$log_file
     validate $? "packaging the shipping application"
+
+    mv target/shipping-1.0.jar shipping.jar &>>$log_file
+    validate $? "moving and renaming jar file"
 }
 
 nodejs_setup(){
