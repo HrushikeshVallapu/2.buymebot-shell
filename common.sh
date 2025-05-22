@@ -49,9 +49,17 @@ nginx_setup(){
     validate $? "Starting nginx"
 }
 
+python3_setup(){
+    dnf install python3 gcc python3-devel -y &>>$log_file
+    validate $? "installing python3"
+
+    pip3 install -r requirements.txt &>>$log_file
+    validate $? "installing dependencies"
+}
+
 maven_setup(){
 
-    dnf install maven -y &>>$log_file
+    dnf install maven -y &>>$losg_file
     validate $? "installing maven and java"
 
     mvn clean package &>>$log_file
