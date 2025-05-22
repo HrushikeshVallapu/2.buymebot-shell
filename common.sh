@@ -59,7 +59,7 @@ python3_setup(){
 
 maven_setup(){
 
-    dnf install maven -y &>>$losg_file
+    dnf install maven -y &>>$log_file
     validate $? "installing maven and java"
 
     mvn clean package &>>$log_file
