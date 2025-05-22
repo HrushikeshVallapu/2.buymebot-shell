@@ -9,7 +9,6 @@ n="\e[0m"
 logs_folder="/var/log/buymebot-logs"
 script_name=$(echo $0 | cut -d "." -f1)
 log_file="$logs_folder/$script_name.log"
-script_dir=$PWD
 
 mkdir -p $logs_folder
 echo "script started executing at $(date)" | tee -a $log_file
@@ -27,15 +26,15 @@ check_root(){
 validate(){
     if [ $1 -eq 0 ]
     then 
-        echo -e "$g  $2 success $n" | tee -a $log_file
+        echo -e "$g installation of $2 success $n" | tee -a $log_file
     else   
-        echo -e "$r  $2 failed $n" | tee -a $log_file
+        echo -e "$r installation of $2 failed $n" | tee -a $log_file
         exit 1
     fi
-}  
+}
 
 print_time(){
     end_time=$(date +%s)
-    total_time=$(($end_time - $start_time))
+    total_time=$(($start_time - $end_time))
     echo -e "script execution completed, $y time taken : $total_time seconds $n" | tee -a $log_file
 }

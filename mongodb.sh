@@ -3,7 +3,7 @@
 source ./common.sh
 app_name=mongodb
 
-check_root()
+check_root
 
 cp mongodb.repo /etc/yum.repos.d/mongodb.repo #copying mongodb.repo to the wanted location in vm
 validate $? "copying mongodb repo"
@@ -21,4 +21,4 @@ validate $? "update listen adress"
 systemctl restart mongod &>>$log_file
 validate $? "restarting mongodb " 
 
-print_time()
+print_time
