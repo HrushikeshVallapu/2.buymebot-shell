@@ -36,6 +36,18 @@ do
     }'
 done
 
+#Waiting for DNS to resolve and SSH to be available
+
+echo "Waiting for instances to be reachable via SSH..."
+for instance in "${instances[@]}"; do
+  echo "Checking SSH access for $instance..."
+  for i in {1..10}; do
+    nc -z -w3 "$instance.$domain_name" 22 && echo "$instance is ready for SSH" && break
+    echo "  Attempt $i: $instance not ready yet. Waiting 10s..."
+    sleep 10
+  done
+done
+
 PASSWORD="DevOps321"
 USER="ec2-user"
 
