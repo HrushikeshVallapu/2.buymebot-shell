@@ -45,13 +45,13 @@ for instance in "${instances[@]}"; do
   do
     if [ $instance != "frontend" ]
     then
-    nc -z -w3 "$instance.$domain_name" 22 && echo "$instance is ready for SSH" && break
-    echo "  Attempt $i: $instance not ready yet. Waiting 10s..."
-    sleep 10
+        nc -z -w3 "$instance.$domain_name" 22 && echo "$instance is ready for SSH" && break
+        echo "  Attempt $i: $instance not ready yet. Waiting 10s..."
+        sleep 10
     else
-    nc -z -w3 "$domain_name" 22 && echo "$instance is ready for SSH" && break
-    echo "  Attempt $i: $instance not ready yet. Waiting 10s..."
-    sleep 10
+        nc -z -w3 "$domain_name" 22 && echo "$instance is ready for SSH" && break
+        echo "  Attempt $i: $instance not ready yet. Waiting 10s..."
+        sleep 10
     fi
   done
 done
@@ -62,13 +62,19 @@ USER="ec2-user"
 for service in "${instances[@]}";
 do
   echo "Connecting to $service"
+    if [ "$service" != "frontend" ]; 
+    then
+        host="$service.$domain_name"
+    else
+        host="$domain_name"
+    fi
 
-  sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "$USER@$service.$domain_name" 'bash -s' <<EOF
+  sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "$USER@$host" 'bash -s' <<EOF
 cd /home/ec2-user
-if [ ! -d "devops-shell-roboshop-instances" ]; then
+if [ ! -d "2.buymebot-shell" ]; then
   git clone https://github.com/HrushikeshVallapu/2.buymebot-shell.git
 fi
-cd devops-shell-roboshop-instances
+cd 2.buymebot-shell
 git reset --hard HEAD      # Discards local changes
 git pull                   # Pulls latest from remote
 chmod +x $service.sh
