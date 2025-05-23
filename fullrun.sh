@@ -1,6 +1,6 @@
 ami_id="ami-09c813fb71547fc4f"
 sg_id="sg-0142341bd063dfed3"
-instances=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
+instances=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "frontend")
 zone_id="Z06633071XX7HF3WWN7FZ"
 domain_name="buymebot.shop"
 
